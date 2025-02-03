@@ -339,6 +339,9 @@
 		{
 			"name": "Check API health",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
