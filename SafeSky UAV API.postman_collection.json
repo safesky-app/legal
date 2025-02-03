@@ -1,11 +1,341 @@
 {
 	"info": {
-		"_postman_id": "68a73eb3-941b-4093-9236-b4b646dc6b29",
+		"_postman_id": "1e721a18-7716-4f0f-aaa5-cd630178a26d",
 		"name": "SafeSky UAV API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2786600"
 	},
 	"item": [
+		{
+			"name": "Live UAV operations",
+			"item": [
+				{
+					"name": "GET nearby aircraft",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav?lat=50.6970&lng=4.3908&radius=20000",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "50.6970"
+								},
+								{
+									"key": "lng",
+									"value": "4.3908"
+								},
+								{
+									"key": "radius",
+									"value": "20000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish UAV",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"my_id\",\n        \"accuracy\": 0,\n        \"status\": \"AIRBORNE\",\n        \"last_update\": {{$timestamp}},\n        \"altitude\": 110,\n        \"altitude_accuracy\": 0,\n        \"course\": 250,\n        \"ground_speed\": 10,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"vertical_rate\": 10,\n        \"call_sign\": \"My UAV1\"\n    }\n]"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish UAV and Get Nearby Aircraft",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"my_id\",\n        \"accuracy\": 0,\n        \"status\": \"AIRBORNE\",\n        \"last_update\": {{$timestamp}},\n        \"altitude\": 110,\n        \"altitude_accuracy\": 0,\n        \"course\": 250,\n        \"ground_speed\": 10,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"vertical_rate\": 10,\n        \"call_sign\": \"My UAV1\"\n    }\n]"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav?return_nearby_traffic=true",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							],
+							"query": [
+								{
+									"key": "return_nearby_traffic",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST UAV with icao",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"my_id1_icao\",\n        \"accuracy\": 0,\n        \"status\": \"AIRBORNE\",\n        \"last_update\": {{$timestamp}},\n        \"altitude\": 180,\n        \"altitude_accuracy\": 0,\n        \"course\": 250,\n        \"ground_speed\": 14,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"vertical_rate\": 10,\n        \"call_sign\": \"My UAV1 icao\",\n        \"icao24\": \"E12B3A\"\n    }\n]"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST UAV light",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"my_id_light\",\n        \"altitude\": 180,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"last_update\": {{$timestamp}}\n    }\n]"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST multiple UAV and Retrieve Traffic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"my_batch_id1\",\n        \"altitude\": 180,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"call_sign\": \"My UAV1\",\n        \"last_update\": {{$timestamp}}\n    },\n    {\n        \"id\": \"my_batch_id2\",\n        \"altitude\": 180,\n        \"latitude\": 50.7,\n        \"longitude\": 4.2,\n        \"call_sign\": \"My UAV2\",\n        \"last_update\": {{$timestamp}}\n    },\n    {\n        \"id\": \"my_batch_id3\",\n        \"altitude\": 180,\n        \"latitude\": 50.8,\n        \"longitude\": 4.1,\n        \"last_update\": {{$timestamp}}\n    },\n    {\n        \"id\": \"my_batch_id4\",\n        \"altitude\": 180,\n        \"latitude\": 58.9796, \n        \"longitude\": 5.7544,\n        \"icao24\": \"E12B3A\",\n        \"call_sign\": \"My UAV4\",\n        \"last_update\": {{$timestamp}}\n    }\n]"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/uav?return_nearby_traffic=true&rad=20000",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"uav"
+							],
+							"query": [
+								{
+									"key": "return_nearby_traffic",
+									"value": "true"
+								},
+								{
+									"key": "rad",
+									"value": "20000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advisory UAV operations",
+			"item": [
+				{
+					"name": "Publishing a Polygon Advisory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "9f7cf3ba78msh94abc5933157b4bp1e2671jsn92e7948d83c3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"properties\": {\n        \"id\": \"Advisory_polygon\",\n        \"call_sign\": \"UAV_polygon\",\n        \"last_update\": {{$timestamp}},\n        \"max_altitude\": 150,\n        \"remarks\": \"Surveying area\"\n      },\n      \"geometry\": {\n        \"type\": \"Polygon\",\n        \"coordinates\": [\n          [\n            [4.39201, 50.69378],\n            [4.39300, 50.69400],\n            [4.39400, 50.69500],\n            [4.39201, 50.69378]\n          ]\n        ]\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/advisory",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"advisory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publishing a Point Advisory with a Radius",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "9f7cf3ba78msh94abc5933157b4bp1e2671jsn92e7948d83c3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"properties\": {\n        \"id\": \"my_advisory_point1\",\n        \"max_altitude\": 150,\n        \"max_distance\": 500,\n        \"last_update\": {{$timestamp}},\n        \"call_sign\": \"Advisory test with a point\",\n        \"remarks\": \"Inspection rails\"\n      },\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          4.4,\n          50.7\n        ]\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/advisory",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"advisory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publishing Multiple Advisories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-rapidapi-key",
+								"value": "9f7cf3ba78msh94abc5933157b4bp1e2671jsn92e7948d83c3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"properties\": {\n        \"id\": \"my_advisory_id1\",\n        \"max_altitude\": 111,\n        \"last_update\": {{$timestamp}},\n        \"call_sign\": \"Advisory test with polygon\",\n        \"remarks\": \"Inspection powerlines\"\n      },\n      \"geometry\": {\n        \"type\": \"Polygon\",\n        \"coordinates\": [\n          [\n            [\n              4.3948,\n              50.6831\n            ],\n            [\n              4.3952,\n              50.6832\n            ],\n            [\n              4.3958,\n              50.6835\n            ],\n            [\n              4.3963,\n              50.6838\n            ],\n            [\n              4.4072,\n              50.6902\n            ],\n            [\n              4.4075,\n              50.6903\n            ],\n            [\n              4.4081,\n              50.6905\n            ],\n            [\n              4.4085,\n              50.6907\n            ],\n            [\n              4.4092,\n              50.6910\n            ],\n            [\n              4.4096,\n              50.6912\n            ],\n            [\n              4.4103,\n              50.6915\n            ],\n            [\n              4.4106,\n              50.6917\n            ],\n            [\n              4.4110,\n              50.6920\n            ],\n            [\n              4.4113,\n              50.6922\n            ],\n            [\n              4.4116,\n              50.6925\n            ],\n            [\n              4.4118,\n              50.6927\n            ],\n            [\n              4.4120,\n              50.6930\n            ],\n            [\n              4.4121,\n              50.6932\n            ],\n            [\n              4.4120,\n              50.6935\n            ],\n            [\n              4.4118,\n              50.6937\n            ],\n            [\n              4.4115,\n              50.6940\n            ],\n            [\n              4.3750,\n              50.7150\n            ],\n            [\n              4.3748,\n              50.7153\n            ],\n            [\n              4.3746,\n              50.7155\n            ],\n            [\n              4.3742,\n              50.7158\n            ],\n            [\n              4.3740,\n              50.7160\n            ],\n            [\n              4.3735,\n              50.7162\n            ],\n            [\n              4.3733,\n              50.7163\n            ],\n            [\n              4.3435,\n              50.7280\n            ],\n            [\n              4.3432,\n              50.7281\n            ],\n            [\n              4.3426,\n              50.7283\n            ],\n            [\n              4.3423,\n              50.7284\n            ],\n            [\n              4.3416,\n              50.7286\n            ],\n            [\n              4.3412,\n              50.7287\n            ],\n            [\n              4.3405,\n              50.7288\n            ],\n            [\n              4.3402,\n              50.7289\n            ],\n            [\n              4.3395,\n              50.7290\n            ],\n            [\n              4.3392,\n              50.7290\n            ],\n            [\n              4.3385,\n              50.7291\n            ],\n            [\n              4.3382,\n              50.7291\n            ],\n            [\n              4.3376,\n              50.7290\n            ],\n            [\n              4.3373,\n              50.7289\n            ],\n            [\n              4.3367,\n              50.7287\n            ],\n            [\n              4.3365,\n              50.7286\n            ],\n            [\n              4.3360,\n              50.7284\n            ],\n            [\n              4.3358,\n              50.7282\n            ],\n            [\n              4.3200,\n              50.7210\n            ],\n            [\n              4.3195,\n              50.7208\n            ],\n            [\n              4.3193,\n              50.7207\n            ],\n            [\n              4.3189,\n              50.7205\n            ],\n            [\n              4.3187,\n              50.7203\n            ],\n            [\n              4.3185,\n              50.7200\n            ],\n            [\n              4.3184,\n              50.7198\n            ],\n            [\n              4.3182,\n              50.7195\n            ],\n            [\n              4.3181,\n              50.7193\n            ],\n            [\n              4.3948,\n              50.6831\n            ]\n          ]\n        ]\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"properties\": {\n        \"id\": \"my_advisory_id2\",\n        \"max_altitude\": 150,\n        \"max_distance\": 500,\n        \"last_update\": {{$timestamp}},\n        \"call_sign\": \"Advisory test with a point\",\n        \"remarks\": \"Inspection rails\"\n      },\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          4.4,\n          50.7\n        ]\n      }\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://sandbox-public-api.safesky.app/v1/advisory",
+							"protocol": "https",
+							"host": [
+								"sandbox-public-api",
+								"safesky",
+								"app"
+							],
+							"path": [
+								"v1",
+								"advisory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Check API health",
 			"request": {
@@ -13,171 +343,14 @@
 				"header": [],
 				"url": {
 					"raw": "https://sandbox-public-api.safesky.app/",
+					"protocol": "https",
 					"host": [
-						"https://sandbox-public-api.safesky.app"
+						"sandbox-public-api",
+						"safesky",
+						"app"
 					],
 					"path": [
 						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET nearby aircraft",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://sandbox-public-api.safesky.app/v1/uav?lat=50.6970&lng=4.3908&radius=20000",
-					"host": [
-						"https://sandbox-public-api.safesky.app"
-					],
-					"path": [
-						"v1",
-						"uav"
-					],
-					"query": [
-						{
-							"key": "lat",
-							"value": "50.6970"
-						},
-						{
-							"key": "lng",
-							"value": "4.3908"
-						},
-						{
-							"key": "radius",
-							"value": "20000"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST UAV",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"my_id\",\n        \"accuracy\": 0,\n        \"status\": \"AIRBORNE\",\n        \"last_update\": {{$timestamp}},\n        \"altitude\": 110,\n        \"altitude_accuracy\": 0,\n        \"course\": 250,\n        \"ground_speed\": 10,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"vertical_rate\": 10,\n        \"call_sign\": \"My UAV1\"\n    }\n]"
-				},
-				"url": {
-					"raw": "https://sandbox-public-api.safesky.app/v1/uav",
-					"host": [
-						"https://sandbox-public-api.safesky.app"
-					],
-					"path": [
-						"v1",
-						"uav"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST UAV with icao",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"my_id1\",\n        \"accuracy\": 0,\n        \"status\": \"AIRBORNE\",\n        \"last_update\": {{$timestamp}},\n        \"altitude\": 180,\n        \"altitude_accuracy\": 0,\n        \"course\": 250,\n        \"ground_speed\": 14,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"vertical_rate\": 10,\n        \"call_sign\": \"My UAV1\",\n        \"icao24\": \"E12B3A\"\n    }\n]"
-				},
-				"url": {
-					"raw": "https://sandbox-public-api.safesky.app/v1/uav",
-					"host": [
-						"https://sandbox-public-api.safesky.app"
-					],
-					"path": [
-						"v1",
-						"uav"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST UAV light",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"my_id\",\n        \"altitude\": 180,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201\n    }\n]"
-				},
-				"url": {
-					"raw": "https://sandbox-public-api.safesky.app/v1/uav",
-					"host": [
-						"https://sandbox-public-api.safesky.app"
-					],
-					"path": [
-						"v1",
-						"uav"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST multiple UAV and Retrieve Traffic",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"my_id1\",\n        \"altitude\": 180,\n        \"latitude\": 50.69378,\n        \"longitude\": 4.39201,\n        \"call_sign\": \"My UAV1\"\n    },\n    {\n        \"id\": \"my_id2\",\n        \"altitude\": 180,\n        \"latitude\": 50.7,\n        \"longitude\": 4.2,\n        \"call_sign\": \"My UAV2\"\n    },\n    {\n        \"id\": \"my_id3\",\n        \"altitude\": 180,\n        \"latitude\": 50.8,\n        \"longitude\": 4.1\n    },\n    {\n        \"id\": \"my_id4\",\n        \"altitude\": 180,\n        \"latitude\": 58.9796, \n        \"longitude\": 5.7544,\n        \"icao24\": \"E12B3A\",\n        \"call_sign\": \"My UAV4\"\n    }\n]"
-				},
-				"url": {
-					"raw": "https://sandbox-public-api.safesky.app/v1/uav?return_nearby_traffic=true&rad=20000",
-					"host": [
-						"https://sandbox-public-api.safesky.app"
-					],
-					"path": [
-						"v1",
-						"uav"
-					],
-					"query": [
-						{
-							"key": "return_nearby_traffic",
-							"value": "true"
-						},
-						{
-							"key": "rad",
-							"value": "20000"
-						}
 					]
 				}
 			},
